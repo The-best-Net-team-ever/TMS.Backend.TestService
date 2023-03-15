@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - tms-test-server
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -52,6 +52,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'tms-test-server'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_99d376600641415ba59c93d79934e32b }}
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_51BC8C63D52F4600A98BBF4AD5AEF504 }}
           package: .
